@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KLH Bachupally Event Portal</title>
+    
+    <!-- Using Tailwind CSS for styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Using Google Fonts for better typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <style>
+        /* Base styles for the futuristic dark mode */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0d1117; /* GitHub Dark-like background */
+            color: #c9d1d9; /* Light gray text */
+        }
+        
+        .font-orbitron {
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        /* Style for the sticky navigation bar */
+        .nav-sticky {
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            background-color: rgba(13, 17, 23, 0.75);
+            border-bottom: 1px solid rgba(48, 54, 61, 0.5);
+        }
+        
+        /* General Glow effect for buttons */
+        .glow-on-hover {
+            transition: all 0.3s ease-in-out;
+            box-shadow: 0 0 5px rgba(230, 57, 70, 0);
+        }
+        .glow-on-hover:hover {
+            box-shadow: 0 0 15px rgba(230, 57, 70, 0.6), 0 0 5px rgba(230, 57, 70, 0.4);
+            color: #fff;
+        }
+
+        /* Event Card specific glows */
+        .event-card {
+            transition: all 0.3s ease-in-out;
+            border: 1px solid #30363d;
+        }
+        .glow-blue-hover:hover {
+            border-color: rgba(69, 123, 157, 0.8);
+            box-shadow: 0 0 20px rgba(69, 123, 157, 0.5);
+        }
+        .glow-red-hover:hover {
+            border-color: rgba(230, 57, 70, 0.8);
+            box-shadow: 0 0 20px rgba(230, 57, 70, 0.5);
+        }
+        .glow-cyan-hover:hover {
+            border-color: rgba(168, 218, 220, 0.8);
+            box-shadow: 0 0 20px rgba(168, 218, 220, 0.5);
+        }
+        
+        .text-glow-hover {
+            transition: all 0.3s ease-in-out;
+            text-shadow: 0 0 8px rgba(59, 130, 246, 0);
+        }
+        .text-glow-hover:hover {
+            text-shadow: 0 0 8px rgba(59, 130, 246, 0.8);
+            color: #fff;
+        }
+        
+        /* Custom focus ring color */
+        .focus-ring-color:focus {
+            --tw-ring-color: #3B82F6;
+        }
+        
+        /* Scrollbar styling */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0d1117;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #2c333c;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #457B9D;
+        }
+
+        /* Hero background pattern */
+        .hero-bg {
+            background-image: radial-gradient(#2c333c 1px, transparent 1px);
+            background-size: 16px 16px;
+        }
+
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- =========== NAVIGATION BAR =========== -->
+    <nav id="navbar" class="nav-sticky">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex-shrink-0">
+                    <a href="#home" class="text-xl md:text-2xl font-bold font-orbitron text-glow-hover" style="color: #A8DADC;">KLH Bachupally Events</a>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-2">
+                        <a href="#home" class="text-gray-300 hover:bg-[#1D3557] text-glow-hover px-3 py-2 rounded-md text-sm font-medium">Home</a>
+                        <a href="#events" class="text-gray-300 hover:bg-[#1D3557] text-glow-hover px-3 py-2 rounded-md text-sm font-medium">Events</a>
+                        <button id="nav-register-btn" class="text-white bg-[#457B9D] hover:bg-opacity-80 transition-all duration-300 px-4 py-2 rounded-md text-sm font-medium">Register</button>
+                    </div>
+                </div>
+                 <!-- Mobile menu button -->
+                <div class="-mr-2 flex md:hidden">
+                    <button id="mobile-menu-button" type="button" class="bg-[#1D3557] inline-flex items-center justify-center p-2 rounded-md text-[#A8DADC] hover:bg-[#457B9D] hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus-ring-color" aria-controls="mobile-menu" aria-expanded="false">
+                        <span class="sr-only">Open main menu</span>
+                        <svg class="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" /></svg>
+                        <svg class="hidden h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile menu -->
+        <div class="md:hidden hidden" id="mobile-menu">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="#home" class="text-gray-300 hover:bg-[#1D3557] hover:text-white block px-3 py-2 rounded-md text-base font-medium">Home</a>
+                <a href="#events" class="text-gray-300 hover:bg-[#1D3557] hover:text-white block px-3 py-2 rounded-md text-base font-medium">Events</a>
+                <button id="mobile-nav-register-btn" class="w-full text-left text-white bg-[#457B9D] hover:bg-opacity-80 block px-3 py-2 rounded-md text-base font-medium">Register</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- =========== MAIN CONTENT =========== -->
+    <main>
+        <!-- Home/Hero section -->
+        <section id="home" class="py-24 bg-[#161b22] relative overflow-hidden">
+             <div class="absolute inset-0 hero-bg opacity-50"></div>
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+                <h1 class="text-4xl md:text-6xl font-extrabold font-orbitron leading-tight text-white">
+                    <span class="block">Experience the Future of</span>
+                    <span class="block" style="color: #E63946;">KLH Campus Life</span>
+                </h1>
+                <p class="mt-4 max-w-2xl mx-auto text-lg md:text-xl text-gray-400">
+                    Your portal to the most electrifying technical fests, cultural events, and workshops.
+                </p>
+                <div class="mt-8">
+                    <button id="hero-register-btn" class="inline-block text-white font-bold py-3 px-8 rounded-lg transition duration-300 glow-on-hover" style="background-color: #E63946;">
+                        Register Now
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Events section -->
+        <section id="events" class="py-20">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center">
+                    <h2 class="text-3xl font-extrabold font-orbitron text-white">Upcoming Events</h2>
+                    <p class="mt-2 text-lg text-gray-400">Don't miss out. The future awaits.</p>
+                </div>
+                <div class="mt-12 grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+                    
+                    <!-- Event Card 1: Novus 2024 -->
+                    <div class="event-card bg-[#161b22] rounded-lg shadow-lg overflow-hidden transform hover:-translate-y-2 glow-blue-hover">
+                        <img src="https://placehold.co/600x400/457B9D/0d1117?text=Novus+2024" alt="Novus 2024" class="w-full h-48 object-cover">
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold font-orbitron text-white">Novus 2024</h3>
+                            <p class="mt-2 text-gray-400">A forward-thinking summit on innovation, technology, and the future of business.</p>
+                            <div class="mt-4 text-sm text-gray-500">
+                                <p><span class="font-semibold text-gray-400">Date:</span> November 15, 2024</p>
+                                <p><span class="font-semibold text-gray-400">Location:</span> Tech Park Convention Center</p>
+                            </div>
+                            <div class="mt-6">
+                                <button class="register-btn w-full text-white font-semibold py-2 px-4 rounded-lg transition-colors hover:bg-opacity-80" style="background-color: #1D3557;" data-event="Novus 2024">
+                                    Register Now
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Event Card 2: Viwentia 2025 -->
+                    <div class="event-card bg-[#161b22] rounded-lg shadow-lg overflow-hidden transform hover:-translate-y-2 glow-red-hover">
+                        <img src="https://placehold.co/600x400/E63946/0d1117?text=Viwentia+2025" alt="Viwentia 2025" class="w-full h-48 object-cover">
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold font-orbitron text-white">Viwentia 2025</h3>
+                            <p class="mt-2 text-gray-400">An immersive experience celebrating life, virtual worlds, and digital entertainment.</p>
+                            <div class="mt-4 text-sm text-gray-500">
+                                <p><span class="font-semibold text-gray-400">Date:</span> February 20, 2025</p>
+                                <p><span class="font-semibold text-gray-400">Location:</span> Grand Exhibition Hall</p>
+                            </div>
+                            <div class="mt-6">
+                                <button class="register-btn w-full text-white font-semibold py-2 px-4 rounded-lg transition-colors hover:bg-opacity-80" style="background-color: #1D3557;" data-event="Viwentia 2025">
+                                    Register Now
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Event Card 3: Kala Utsav 2025 -->
+                    <div class="event-card bg-[#161b22] rounded-lg shadow-lg overflow-hidden transform hover:-translate-y-2 glow-cyan-hover">
+                        <img src="https://placehold.co/600x400/A8DADC/0d1117?text=Kala+Utsav" alt="Kala Utsav 2025" class="w-full h-48 object-cover">
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold font-orbitron text-white">Kala Utsav 2025</h3>
+                            <p class="mt-2 text-gray-400">A vibrant festival of arts, culture, and heritage with workshops and performances.</p>
+                            <div class="mt-4 text-sm text-gray-500">
+                                <p><span class="font-semibold text-gray-400">Date:</span> April 5, 2025</p>
+                                <p><span class="font-semibold text-gray-400">Location:</span> City Cultural Plaza</p>
+                            </div>
+                            <div class="mt-6">
+                                <button class="register-btn w-full text-white font-semibold py-2 px-4 rounded-lg transition-colors hover:bg-opacity-80" style="background-color: #1D3557;" data-event="Kala Utsav 2025">
+                                    Register Now
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- =========== FOOTER =========== -->
+    <footer style="background-color: #0d1117; border-top: 1px solid #30363d;">
+        <div class="max-w-7xl mx-auto py-8 px-4 sm:px-6 lg:px-8 text-center">
+            <p>&copy; 2025 KLH Bachupally. All rights reserved.</p>
+            <p class="mt-4 text-sm" style="color: #A8DADC;">Designed & Developed by Likith Gummadi</p>
+        </div>
+    </footer>
+
+    <!-- =========== REGISTRATION MODAL =========== -->
+    <div id="registration-modal" class="hidden fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-50 p-4 transition-opacity duration-300">
+        <div id="modal-content" class="bg-[#161b22] border border-gray-700 rounded-lg shadow-xl w-full max-w-md p-8 relative transform transition-all duration-300 scale-95 opacity-0">
+            
+            <!-- Close Button -->
+            <button id="close-modal-btn" class="absolute top-4 right-4 text-gray-500 hover:text-white">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+            </button>
+
+            <!-- Registration Form Container -->
+            <div id="registration-form-container">
+                <div class="text-center">
+                    <h2 class="text-2xl font-bold font-orbitron text-white">Register for an Event</h2>
+                    <p class="mt-2 text-md text-gray-400">Secure your spot in the future.</p>
+                </div>
+                <form id="registration-form" class="mt-8 space-y-6">
+                    <div>
+                        <label for="name" class="block text-sm font-medium text-gray-300">Full Name</label>
+                        <input type="text" name="name" id="name" required class="mt-1 block w-full px-3 py-2 bg-[#0d1117] border border-gray-600 rounded-md shadow-sm placeholder-gray-500 text-white focus:outline-none focus:ring-2 focus-ring-color sm:text-sm">
+                    </div>
+                    <div>
+                        <label for="email" class="block text-sm font-medium text-gray-300">Email Address</label>
+                        <input type="email" name="email" id="email" required class="mt-1 block w-full px-3 py-2 bg-[#0d1117] border border-gray-600 rounded-md shadow-sm placeholder-gray-500 text-white focus:outline-none focus:ring-2 focus-ring-color sm:text-sm">
+                    </div>
+                    <div>
+                        <label for="event-select" class="block text-sm font-medium text-gray-300">Select Event</label>
+                        <select id="event-select" name="event" required class="mt-1 block w-full pl-3 pr-10 py-2 bg-[#0d1117] border-gray-600 text-white focus:outline-none focus:ring-2 focus-ring-color sm:text-sm rounded-md">
+                            <option value="">-- Please choose an event --</option>
+                            <option value="Novus 2024">Novus 2024</option>
+                            <option value="Viwentia 2025">Viwentia 2025</option>
+                            <option value="Kala Utsav 2025">Kala Utsav 2025</option>
+                        </select>
+                    </div>
+                    <div>
+                        <button type="submit" class="w-full flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 glow-on-hover" style="background-color: #E63946;">
+                            Complete Registration
+                        </button>
+                    </div>
+                </form>
+            </div>
+            
+            <!-- Confirmation Message -->
+            <div id="confirmation-message" class="hidden text-center">
+                 <div class="mx-auto flex items-center justify-center h-12 w-12 rounded-full" style="background-color: #A8DADC;">
+                    <svg class="h-6 w-6 text-[#1D3557]" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                </div>
+                <h3 class="mt-5 text-lg font-bold font-orbitron text-white">Registration Successful!</h3>
+                <div class="mt-2 text-md text-gray-400">
+                    <p id="confirmation-text">Thank you for registering. A confirmation email has been sent.</p>
+                </div>
+                <div class="mt-6">
+                    <button id="register-another-btn" type="button" class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 text-base font-medium text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 hover:bg-opacity-80 transition-colors" style="background-color: #457B9D;">
+                        Done
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- =========== JAVASCRIPT =========== -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            
+            // --- Mobile Menu Toggle ---
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const openIcon = mobileMenuButton.querySelector('svg:first-child');
+            const closeIcon = mobileMenuButton.querySelector('svg:last-child');
+
+            mobileMenuButton.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+                openIcon.classList.toggle('hidden');
+                closeIcon.classList.toggle('hidden');
+            });
+
+            // --- Smooth Scrolling for Anchor Links ---
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                    if (!mobileMenu.classList.contains('hidden')) {
+                         mobileMenu.classList.add('hidden');
+                         openIcon.classList.remove('hidden');
+                         closeIcon.classList.add('hidden');
+                    }
+                });
+            });
+
+            // --- Modal Handling ---
+            const modal = document.getElementById('registration-modal');
+            const modalContent = document.getElementById('modal-content');
+            const closeModalBtn = document.getElementById('close-modal-btn');
+            const allRegisterBtns = document.querySelectorAll('#nav-register-btn, #hero-register-btn, #mobile-nav-register-btn, .register-btn');
+            const eventSelect = document.getElementById('event-select');
+
+            const openModal = () => {
+                modal.classList.remove('hidden');
+                setTimeout(() => {
+                    modal.classList.remove('opacity-0');
+                    modalContent.classList.remove('scale-95', 'opacity-0');
+                }, 10);
+            };
+
+            const closeModal = () => {
+                modalContent.classList.add('scale-95', 'opacity-0');
+                modal.classList.add('opacity-0');
+                setTimeout(() => {
+                    modal.classList.add('hidden');
+                    resetFormView();
+                }, 300);
+            };
+            
+            allRegisterBtns.forEach(button => {
+                button.addEventListener('click', function() {
+                    const eventName = this.getAttribute('data-event');
+                    if (eventName) {
+                        eventSelect.value = eventName;
+                    }
+                    openModal();
+                    if (this.id === 'mobile-nav-register-btn' && !mobileMenu.classList.contains('hidden')) {
+                         mobileMenu.classList.add('hidden');
+                         openIcon.classList.remove('hidden');
+                         closeIcon.classList.add('hidden');
+                    }
+                });
+            });
+
+            closeModalBtn.addEventListener('click', closeModal);
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    closeModal();
+                }
+            });
+
+            // --- Form Submission and Confirmation ---
+            const registrationForm = document.getElementById('registration-form');
+            const formContainer = document.getElementById('registration-form-container');
+            const confirmationMessage = document.getElementById('confirmation-message');
+            const confirmationText = document.getElementById('confirmation-text');
+            const registerAnotherBtn = document.getElementById('register-another-btn');
+
+            registrationForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                const name = document.getElementById('name').value;
+                const eventSelected = eventSelect.value;
+
+                if (!name || !document.getElementById('email').value || !eventSelected) {
+                    // Replace alert with a more modern notification if desired
+                    alert('Please fill out all fields.');
+                    return;
+                }
+
+                confirmationText.innerHTML = `Thank you, <strong class="font-bold text-white">${name}</strong>! Your registration for <strong class="font-bold text-white">${eventSelected}</strong> is confirmed.`;
+                
+                formContainer.classList.add('hidden');
+                confirmationMessage.classList.remove('hidden');
+            });
+
+            const resetFormView = () => {
+                registrationForm.reset();
+                confirmationMessage.classList.add('hidden');
+                formContainer.classList.remove('hidden');
+            };
+
+            registerAnotherBtn.addEventListener('click', closeModal);
+
+        });
+    </script>
+
+</body>
+</html>
